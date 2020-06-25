@@ -85,3 +85,7 @@ These are the implementation of our mutation strategy. Regardless of details, yo
 ## Memo
 
 To execute `Traffic Manipulator` on a large traffic set can be overnight work... Suggestions on saving time can be changing internal parameters in PSO (e.g., decreasing the population size or iteration numbers)  OR just choosing another efficient feature extractor (AfterImage is exactly the performance bottleneck now).
+
+## Citations
+This source code is part of our work ***Practical Traffic-space Adversarial Attacks on Learning-based NIDSs*** available at https://arxiv.org/abs/2005.07519. You can find more details in this paper, and if you use the source code, please cite the paper.
+
