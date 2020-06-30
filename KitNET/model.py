@@ -52,7 +52,7 @@ if __name__ == "__main__":
     parse.add_argument('-M', '--mode', type=str, default='exec', help="{train,exec}")
 
     parse.add_argument('-tf', '--feat_file_path', type=str, required=True, help="train or execute feature file path (.npy)")
-    parse.add_argument('-rf', '--RMSE_file_path', type=str, required=True,
+    parse.add_argument('-rf', '--RMSE_file_path', type=str,
                        help="resulting rmse file (.pkl) path, only for execute mode!")
 
     parse.add_argument('-mf', '--model_file_path', type=str, default='./example/model.pkl',
@@ -115,10 +115,16 @@ if __name__ == "__main__":
         print('Total number:', len(rmse))
         print("rmse mean:", np.mean(rmse))
 
-        # x = np.arange(0,len(rmse),1)
-        # plt.figure()
-        # plt.scatter(x,rmse)
-        # plt.show()
+        x = np.arange(0,len(rmse),1)
+        plt.figure()
+        plt.scatter(x,rmse,s=12, c='r')
+        plt.plot(x,[AD_threshold]*len(rmse),c='black',linewidth=2,label="AD_threshold")
+        plt.title("RMSE of Test set")
+        plt.xlabel('pkt no.')
+        plt.ylabel('RMSE in Kitsune')
+        plt.legend()
+        plt.show()
+
 
     else:
         raise RuntimeError("argument -M is wrong! choose 'train' or 'execute'")

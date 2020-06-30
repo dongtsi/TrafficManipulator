@@ -173,7 +173,7 @@ class Analyzer:
             print("  Before:", org_dis, "After:", mut_dis)
             print("  MMR:", MMR)
 
-    def plt_rmse(self):  # 对比原来的rmse和现在的rmse
+    def plt_rmse(self,AD_threshold):  # 对比原来的rmse和现在的rmse
 
         x = np.arange(0, self.len, 1)
         plt.figure()
@@ -184,25 +184,17 @@ class Analyzer:
 
         plt.scatter(x, self.org_rmse_list, s=12, c='#8A977B', alpha=0.5, label="Before")
         plt.scatter(x, self.rmse_list, s=12, c='#FE4365', alpha=0.5, label="After")
-        plt.plot(x, [np.mean(self.org_rmse_list)] * self.len, c='#8A977B', alpha=0.3, linewidth=5)
-        plt.plot(x, [np.mean(self.rmse_list)] * self.len, c='#FE4365', alpha=0.3, linewidth=5)
+        plt.plot(x, [np.mean(self.org_rmse_list)] * self.len, c='#8A977B', alpha=0.3, linewidth=4)
+        plt.plot(x, [np.mean(self.rmse_list)] * self.len, c='#FE4365', alpha=0.3, linewidth=4)
+        plt.plot(x, [AD_threshold] * self.len, c='black', linewidth=2,label="AD_threshold")
         plt.title("RMSE change and mean")
         plt.xlabel('pkt no.')
         plt.ylabel('RMSE in Kitsune')
-        # plt.ylim(0,1820)
         plt.legend(loc='upper right')
 
         # plt.savefig('./tmp.pdf')
         plt.show()
 
-    def plt_feature(self):
-        x = np.arange(0, 100, 1)
-        plt.figure()
-
-        for i in range(10000):
-            plt.plot(x, self.feature_list[i], c='#FE4365', alpha=0.6,linewidth=1)
-
-        plt.show()
 
 
 
@@ -246,8 +238,8 @@ if __name__ == "__main__":
     print("AD_threshold:", AD_threshold)
 
     a.eval(AD_threshold,arg.mimic_set,arg.org_feat_file,arg.normalizer,need_mmr=True)
-    a.plt_rmse()
-    # a.plt_feature()
+    a.plt_rmse(AD_threshold)
+
 
 
 

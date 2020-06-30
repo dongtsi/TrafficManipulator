@@ -23,9 +23,9 @@ To install `scapy` and `cython`, run in the terminal:
 
 1. **Prepare the targeted system and malicious traffic:** First, you need to select a targeted learning-based NIDS (including a feature extractor and a learning model in most cases). You may also select training and test set, and then compile the training set and train the model.
   
-2. **Prepare a target benign feature set to mimic: ** Second, the target feature set (which is classified as benign by the targeted system) need to be selected. This can be down by simply using benign features. Besides, an advanced GAN-based method to generate more suitable **adversarial features** can be found in our [paper](https://arxiv.org/abs/2005.07519).
+2. **Prepare a target benign feature set to mimic:** Second, the target feature set (which is classified as benign by the targeted system) need to be selected. This can be down by simply using benign features. Besides, an advanced GAN-based method to generate more suitable **adversarial features** can be found in our [paper](https://arxiv.org/abs/2005.07519).
 
-3. **Tune parameters of Traffic Manipulator and begin to attack：** Before runing this tool, the last step is to set parameters. 
+3. **Tune parameters of Traffic Manipulator and begin to attack：** Before running this tool, the last step is to set parameters. 
 
 See line 31 in `main.py` :
 
@@ -60,10 +60,56 @@ See line 31 in `main.py` :
    **Simply, if you wish higher performance, increase Param 4,5,6 and 8, 9 gracefully. And if you wish to speed up results, decrease Param 4,5,6.**
 
 ## Example —— Case study on Kitsune
-**Kitsune** [NDSS '18] is a state-of-the-art deep learning-based NIDS, more information can be found in this [link](https://github.com/ymirsky/Kitsune-py). 
+**Kitsune** [NDSS '18] is a state-of-the-art deep learning-based NIDS, more information can be found in this [link](https://github.com/ymirsky/Kitsune-py). In this example, we use Traffic Manipulator to evade Kitsune (i.e., generate mutated malicious traffic which can be classified as benign by Kitsune).
 
-TBA.
+1. Compiling cython file in AfterImage as follows:
+
+   ```
+   cd AfterImageExtractor/
+   python setup.py build_ext --inplace
+   ```
+2. Training KitNET (learning model in Kitsune) with the training set:
+    (Note that you must under `TrafficManipulator/` path, so `cd ..` first)
+
+  ```
+  cd ../
+  python KitNET/model.py -M train -tf example/train_ben.npy
+  ```
+3. Executing KitNET with the original malicious traffic:
+
+  ```
+  python KitNET/model.py -M exec -tf example/test.npy -rf example/test_rmse.pkl
+  ```
+The RMSE of original malicious traffic reported by KitNET is as follows:
+<center>
+<img src="fig/test_rmse.png" width="50%"> 
+<div>Pkts over the black line are detected as malicious (ACC=84%)</div>
+</center>
+
+
+4. Using `main.py` to mutate your traffic (You can use  `python main.py -h` for more details about the arguments):
+
+   ```
+   python main.py -m example/test.pcap -b example/mimic_set.npy -n example/normalizer.pkl -i example/init.pcap
+   ```
+
+5. Evaluating the effectness of mutated traffic (You can use  `python eval.py -h` for more details about the arguments):
+
+   ```
+   python eval.py -op example/test.pcap -or example/test_rmse.pkl -of example/test.npy -b example/mimic_set.npy -n example/normalizer.pkl
+   ```
+The result should look like the figure below:
+<center>
+<img src="fig/eval.png" width="50%"> 
+</center>
+It can be seen that the RMSE of mutated traffic (red) are decreased significantly compared with the original traffic (green)
+
+**For more experimental results and analysis (including attacks on multiple targeted systems, execution overhead, attack overhead, functional verification, etc.), please refer to our [paper](https://arxiv.org/abs/2005.07519).**
 
 ## Citations
-This source code is part of our work ***Practical Traffic-space Adversarial Attacks on Learning-based NIDSs*** available at https://arxiv.org/abs/2005.07519. You can find more details in this paper, and if you use the source code, please cite the paper.
+This source code is part of our work:
+
+***Practical Traffic-space Adversarial Attacks on Learning-based NIDSs*** available at [here](https://arxiv.org/abs/2005.07519). 
+
+You can find more details in this paper, and if you use the source code, **please cite the paper**.
 
