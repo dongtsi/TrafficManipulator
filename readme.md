@@ -43,16 +43,19 @@ See line 31 in `main.py` :
    There are basically 9 parameters in our algorithm, which can be divided into 3 groups:
 
    - Internal parameters in PSO (in terms of velocity update):
-     1. `w` : wight of inertia 
-     2. `c1`: wight of cognitive force 
-     3. `c2`: wight of social force 
+
+       1. `w` : wight of inertia 
+       2. `c1`: wight of cognitive force 
+       3. `c2`: wight of social force 
 
    - Internal parameters in PSO  (in terms of searching configuration): 
-     4. `max_iter`: iterations of searching 
-     5. `particle_num`: total number of particles (population)
-     6. `grp_size`: number of particles per neighborhood
+   
+       4. `max_iter`: iterations of searching 
+       5. `particle_num`: total number of particles (population)
+       6. `grp_size`: number of particles per neighborhood
 
    -  manipulator parameters :
+
        7. `grp_size`: number of network packets mutated for each processing (Notice it's different from the above `grp_size`)
        8. `max_time_extend`: the interarrival time of each two mutated packets in mutated traffic is no more than `max_time_extend` times original interarrival time. 
        9. `max_cft_pkt`: the maximum number of crafted packets aggregated with one original packet.
