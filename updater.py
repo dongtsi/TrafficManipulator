@@ -45,12 +45,15 @@ def update_X(
                 max_time_extend,
                 proto_max_lmt  # 协议层数`的最大值（每个mal包不同）
             ):
-
+    begin_timestamp = 1540450873.452971
+    
+    last_end_time = float (last_end_time)
     # 计算最大允许的序列全部经过时间（用于计算mal_itv_lmt）
-    max_mal_itv = (groupList[-1].time - last_end_time) * (max_time_extend+1)
+    max_mal_itv = (float(groupList[-1].time) - last_end_time) * (max_time_extend+1)
 
     # 计算mal的最小间距限制（每个粒子在init后时固定的）
     mal_itv_lmt = max_mal_itv / D
+    
     # mal_itv_lmt = 0
 
     # 更新mal中`时间点`并判断范围(注意需要异步按顺序更新，不能同步更新)

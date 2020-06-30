@@ -27,7 +27,7 @@ def rebuild(
             grp_size,                   # 数据包组中包的个数
             X,
             groupList,
-            tmp_pcap_file
+            # tmp_pcap_file
            ):
 
     newList = []  # 存放此粒子表示的包序列
@@ -71,5 +71,5 @@ def rebuild(
         mal_pkt.time = X.mal[i][0]
         newList.append(mal_pkt)
 
-    wrpcap(tmp_pcap_file, newList)
+    # wrpcap(tmp_pcap_file, newList)
     return newList

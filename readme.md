@@ -1,56 +1,33 @@
-# Traffic Manipulator
+![](./fig/overview.jpg)
 
-## Introduction 
 
-This is a traffic mutation tool employing Particle Swarm Optimization (__PSO__) algorithm. Given an _original (malicious) network traffic set_ and a _target feature set_, this tool can generate a *new mutated network traffic set* that **its features extracted by a specific extractor will be as similar as possible to the target feature set**.
+
+## What is Traffic Manipulator?
+
+**Traffic Manipulator** is a *black-box* traffic mutation tool which can effectively and efficiently generate adversarial crafted traffic to evade learning-based NIDSs while preserving the original functionality. Traffic Manipulator is practical, generic and model-agnostic.
+
+As shown in the above figure, Traffic Manipulator employs Particle Swarm Optimization (__PSO__) algorithm to search approximate solutions in the high-dimensional discrete traffic space. Given an _original (malicious) network traffic set_ and a _target feature set_, this tool can generate a *mutated network traffic* that **its features extracted by a specific extractor will be as similar as possible to the target feature set**.
 
 ## Implementation Notes
 
-- Special Python dependencies:  cython and scapy
+- Special Python dependencies:  **cython** and **scapy**
 - The source code has been tested with Python 3.6 on a Linux 64bit and Win10  64bit machine 
 
-## Structure
-
-``` 
-- AfExtractor
-	- ...
-	- ...
-```
-
-This is the implementation of [AfterImage]( https://github.com/ymirsky/Kitsune-py ), the feature extractor used in Kitsune.
-
-``` 
-- manipulator.py
-- ...
-- ...
-- main.py
-```
-
-These are the implementation of our mutation strategy. Regardless of details, you can use `main.py` as an interface to mutate network traffic.
+To install `scapy` and `cython`, run in the terminal:
+   ```
+   pip install scapy
+   pip install cython
+   ```
 
  ## Usage
 
-1. First, compiling cython file in AfterImage as follows:
+1. **Prepare the targeted system and malicious traffic:** First, you need to select a targeted learning-based NIDS (including a feature extractor and a learning model in most cases). You may also select training and test set, and then compile the training set and train the model.
+  
+2. **Prepare a target benign feature set to mimic: ** Second, the target feature set (which is classified as benign by the targeted system) need to be selected. This can be down by simply using benign features. Besides, an advanced GAN-based method to generate more suitable **adversarial features** can be found in our [paper](https://arxiv.org/abs/2005.07519).
 
-   ```
-   cd AfExtractor/
-   python setup.py build_ext --inplace
-   ```
+3. **Tune parameters of Traffic Manipulator and begin to attack：** Before runing this tool, the last step is to set parameters. 
 
-2. Using `main.py` to mutate your traffic. Note that, some required arguments can be give as the following example:
-
-   ```
-   python main.py -m ./example/test.pcap -b ./example/mimic_set.csv
-   ```
-
-   - `-m` the original (malicious) network traffic set (".pcap" format)
-   - `-b` the target feature set (".csv" format)
-
-   Other parameters all have default value, use  `python main.py -h` or `python manipulator.py -h` for more details. 
-
-3. **Parameters**:
-
-   See line 24 in `main.py` :
+See line 31 in `main.py` :
 
    ``` python
    # Choose Params
@@ -75,16 +52,17 @@ These are the implementation of our mutation strategy. Regardless of details, yo
      5. `particle_num`: total number of particles (population)
      6. `grp_size`: number of particles per neighborhood
 
-    -  manipulator parameters :
+   -  manipulator parameters :
        7. `grp_size`: number of network packets mutated for each processing (Notice it's different from the above `grp_size`)
        8. `max_time_extend`: the interarrival time of each two mutated packets in mutated traffic is no more than `max_time_extend` times original interarrival time. 
        9. `max_cft_pkt`: the maximum number of crafted packets aggregated with one original packet.
 
    **Simply, if you wish higher performance, increase Param 4,5,6 and 8, 9 gracefully. And if you wish to speed up results, decrease Param 4,5,6.**
 
-## Memo
+## Example —— Case study on Kitsune
+**Kitsune** [NDSS '18] is a state-of-the-art deep learning-based NIDS, more information can be found in this [link](https://github.com/ymirsky/Kitsune-py). 
 
-To execute `Traffic Manipulator` on a large traffic set can be overnight work... Suggestions on saving time can be changing internal parameters in PSO (e.g., decreasing the population size or iteration numbers)  OR just choosing another efficient feature extractor (AfterImage is exactly the performance bottleneck now).
+TBA.
 
 ## Citations
 This source code is part of our work ***Practical Traffic-space Adversarial Attacks on Learning-based NIDSs*** available at https://arxiv.org/abs/2005.07519. You can find more details in this paper, and if you use the source code, please cite the paper.
