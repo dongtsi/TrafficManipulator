@@ -28,7 +28,5 @@ if __name__ == "__main__":
     knormer = KNnormalizer(arg.model_file_path)
     knormer.fit_transform(train_feat[arg.FMgrace:arg.ADgrace])
 
-
-
     with open(arg.normalizer_file_path,'wb') as f:
         pkl.dump(knormer,f)

@@ -66,23 +66,21 @@ See line 31 in `main.py` :
 **Kitsune** [NDSS '18] is a state-of-the-art deep learning-based NIDS, more information can be found in this [link](https://github.com/ymirsky/Kitsune-py). In this example, we use Traffic Manipulator to evade Kitsune (i.e., generate mutated malicious traffic which can be classified as benign by Kitsune).
 
 1. Compiling cython file in AfterImage as follows:
-
    ```
    cd AfterImageExtractor/
    python setup.py build_ext --inplace
    ```
 2. Training KitNET (learning model in Kitsune) with the training set:
     (Note that you must under `TrafficManipulator/` path, so `cd ..` first)
-
-  ```
-  cd ../
-  python KitNET/model.py -M train -tf example/train_ben.npy
-  ```
+   ```
+   cd ../
+   python KitNET/model.py -M train -tf example/train_ben.npy
+   ```
 3. Executing KitNET with the original malicious traffic:
+   ```
+   python KitNET/model.py -M exec -tf example/test.npy -rf example/test_rmse.pkl
+   ```
 
-  ```
-  python KitNET/model.py -M exec -tf example/test.npy -rf example/test_rmse.pkl
-  ```
 The RMSE of original malicious traffic reported by KitNET is as follows:
 <center>
 <img src="fig/test_rmse.png" width="50%"> 
@@ -101,6 +99,7 @@ The RMSE of original malicious traffic reported by KitNET is as follows:
    ```
    python eval.py -op example/test.pcap -or example/test_rmse.pkl -of example/test.npy -b example/mimic_set.npy -n example/normalizer.pkl
    ```
+   
 The result should look like the figure below:
 <center>
 <img src="fig/eval.png" width="50%"> 
