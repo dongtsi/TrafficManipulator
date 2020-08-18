@@ -19,7 +19,7 @@ To install `scapy` and `cython`, run in the terminal:
    pip install cython
    ```
 
- ## Usage
+## Usage
 
 1. **Prepare the targeted system and malicious traffic:** First, you need to select a targeted learning-based NIDS (including a feature extractor and a learning model in most cases). You may also select training and test set, and then compile the training set and train the model.
   
