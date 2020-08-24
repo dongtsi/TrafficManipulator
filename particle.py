@@ -42,7 +42,7 @@ class Particle:
         self.X, self.proto_max_lmt = initialize(self.grp_size, last_end_time,
                                                 groupList, max_time_extend,
                                                 max_cft_pkt, min_time_extend,
-                                                max_crafted_pkt_prob)  # 粒子位置
+                                                max_crafted_pkt_prob)
         self.V = Unit(self.grp_size, self.max_cft_pkt)
 
         self.indi_best_X = None

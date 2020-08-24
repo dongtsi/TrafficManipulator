@@ -141,8 +141,8 @@ class Manipulator:
         timer = time.time()
 
         acc_ics_time = 0
-        last_end_time = self.pktList[0].time
-        begin_timestamp = self.pktList[0].time
+        last_end_time = float(self.pktList[0].time)
+        begin_timestamp = float(self.pktList[0].time)
 
         st = start_no
         ed = st + self.grp_size
@@ -163,7 +163,8 @@ class Manipulator:
             # ---- increase initial time of the new pkt group----------------+
             for pkt in groupList:
                 # pkt.time += Decimal(acc_ics_time)
-                pkt.time += acc_ics_time
+                # pkt.time += acc_ics_time
+                pkt.time = float(pkt.time) + acc_ics_time
 
             # ---- execute PSO-----------------------------------------------+
             pso_show_info = True
