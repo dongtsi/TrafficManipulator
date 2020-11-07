@@ -88,9 +88,12 @@ The RMSE of original malicious traffic reported by KitNET is as follows:
 </center>
 
 
-4. Using `main.py` to mutate your traffic (You can use  `python main.py -h` for more details about the arguments):
+4. Generating Normalizer for Kitsune （see This [issue](https://github.com/dongtsi/TrafficManipulator/issues/1) for details） 
+
+   Using `main.py` to mutate your traffic (You can use  `python main.py -h` for more details about the arguments):
 
    ```
+   python tools.py
    python main.py -m example/test.pcap -b example/mimic_set.npy -n example/normalizer.pkl -i example/init.pcap
    ```
 
@@ -99,7 +102,8 @@ The RMSE of original malicious traffic reported by KitNET is as follows:
    ```
    python eval.py -op example/test.pcap -or example/test_rmse.pkl -of example/test.npy -b example/mimic_set.npy -n example/normalizer.pkl
    ```
-   
+
+
 The result should look like the figure below:
 <center>
 <img src="fig/eval.png" width="50%"> 
@@ -107,6 +111,15 @@ The result should look like the figure below:
 It can be seen that the RMSE of mutated traffic (red) are decreased significantly compared with the original traffic (green)
 
 **For more experimental results and analysis (including attacks on multiple targeted systems, execution overhead, attack overhead, functional verification, etc.), please refer to our [paper](https://arxiv.org/abs/2005.07519).**
+
+
+### More about Kitsune
+
+We implemented the feature extractor AfterImage based on the open-source code released by [Kitsune](https://github.com/ymirsky/Kitsune-py). Here is an example for extracting features from raw packets:
+
+   ```
+   python extractor.py -i ./example/test.pcap -o ./example/test.npy
+   ```
 
 ## Citations
 This source code is part of our work:
