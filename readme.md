@@ -88,7 +88,7 @@ The RMSE of original malicious traffic reported by KitNET is as follows:
 </center>
 
 
-4. Generating Normalizer for Kitsune （see This [issue](https://github.com/dongtsi/TrafficManipulator/issues/1) for details） 
+4. Generating Normalizer for Kitsune (see This [issue](https://github.com/dongtsi/TrafficManipulator/issues/1) for details)
 
    Using `main.py` to mutate your traffic (You can use  `python main.py -h` for more details about the arguments):
 
