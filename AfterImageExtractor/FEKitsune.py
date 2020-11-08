@@ -1,6 +1,6 @@
 from AfterImageExtractor.FeatureExtractor import *
 
-STOP_FLAG = -10086.12345
+STOP_FLAG = 999999999.
 # MIT License
 #
 # Copyright (c) 2018 Yisroel mirsky
@@ -23,7 +23,7 @@ STOP_FLAG = -10086.12345
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-''' 修改标注 '''
+
 class Kitsune:
     #def __init__(self,file_path,limit,max_autoencoder_size=10,FM_grace_period=None,AD_grace_period=10000,learning_rate=0.1,hidden_ratio=0.75,):
     def __init__(self, file_path, limit, roll_back=False):

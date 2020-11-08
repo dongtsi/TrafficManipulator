@@ -1,12 +1,12 @@
 import numpy as np
 
-STOP_FLAG = -10086.12345
+STOP_FLAG = 999999999.
 
-# Input: K（K自带了pcap文件）
+# Input: K
 def RunFE(
             K,
             origin_pos=None,
-            output_file=".csv",      # 选择是否将FE输出的features以numpy的形式保存在csv文件中
+            output_file=".csv",
             show_info=False
           ):
     if show_info:
