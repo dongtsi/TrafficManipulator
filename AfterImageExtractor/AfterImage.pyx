@@ -804,6 +804,8 @@ cdef class extrapolator:
 
 # =======================================================================
 # =======================================================================
+# ================= Optimizated AfterImag ===============================
+# =======================================================================
 # =======================================================================
 cdef class incStatDB2(incStatDB):
 
@@ -812,21 +814,21 @@ cdef class incStatDB2(incStatDB):
     # cdef dict HT
     cdef public dict HT2
 
-    ## 2020.04修改-支持回退 ----
+    ## 2020.04 Update Roll back ----
     cdef public dict backup1
     cdef public dict backup2
     cdef public int roll_back
-    ## ---- 2020.04修改-支持回退 
+    ## ---- 2020.04 Update Roll back 
     
     def __init__(self,double limit=np.Inf,double default_lambda=np.nan,roll_back=False):
         super().__init__(limit,default_lambda)
         self.HT2 = dict()
 
-        ## 2020.04修改-支持回退 ----
+        ## 2020.04 Update Roll back ----
         self.backup1 = dict()
         self.backup2 = dict()
         self.roll_back = roll_back
-        ## ---- 2020.04修改-支持回退 
+        ## ---- 2020.04 Update Roll back 
     
     def register(self, str ID, double Lambda=1,double init_time=0,
                 int isTypeDiff=False, str dir='o'):
@@ -887,9 +889,6 @@ cdef class incStatDB2(incStatDB):
                         self.backup2[key] = [copy.copy(incS),dict()]
         else:
             raise RuntimeError("Invalid Params: dir")
-        
-        ## 2020.04修改-支持回退 ---- 
-        ## ---- 2020.04修改-支持回退 
         
         return incS
 

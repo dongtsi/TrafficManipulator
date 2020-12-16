@@ -40,11 +40,11 @@ class KitNET:
         self.n = n
 
         # Variables
-        ''' 修改标注 '''
+        ''' My Update '''
         # self.n_trained = 55000+10 # the number of training instances so far
         self.n_executed = 0 # the number of executed instances so far
         # self.v = feature_map
-        ''' 修改标注 '''
+        ''' My Update '''
         # if self.v is None:
         self.v = pickle.load(f)
         print("## mapping(v) has been loaded from file...")
