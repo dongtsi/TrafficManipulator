@@ -122,9 +122,25 @@ We implemented the feature extractor AfterImage based on the open-source code re
    ```
 
 ## Citations
-This source code is part of our work:
+This source code is part of our work accepted by [IEEE JSAC](https://ieeexplore.ieee.org/abstract/document/9448103):
 
-***Practical Traffic-space Adversarial Attacks on Learning-based NIDSs*** available at [here](https://arxiv.org/abs/2005.07519). 
+***Evaluating and Improving Adversarial Robustness of Machine Learning-Based Network Intrusion Detectors*** 
 
-You can find more details in this paper, and if you use the source code, **please cite the paper**.
+Its pre-print version is available at [here](https://arxiv.org/abs/2005.07519). 
+
+You can find more details in this paper, and if you use the source code, **please cite the paper** as follows:
+
+> D. Han et al., "Evaluating and Improving Adversarial Robustness of Machine Learning-Based Network Intrusion Detectors," in IEEE Journal on Selected Areas in Communications, doi: 10.1109/JSAC.2021.3087242.
+
+(or **BibTex**:)
+
+@ARTICLE{9448103,  
+author={Han, Dongqi and Wang, Zhiliang and Zhong, Ying and Chen, Wenqi and Yang, Jiahai and Lu, Shuqiang and Shi, Xingang and Yin, Xia},  
+journal={IEEE Journal on Selected Areas in Communications},   
+title={Evaluating and Improving Adversarial Robustness of Machine Learning-Based Network Intrusion Detectors},   
+year={2021},  
+volume={},  
+number={},  
+pages={1-1},  
+doi={10.1109/JSAC.2021.3087242}}
 
