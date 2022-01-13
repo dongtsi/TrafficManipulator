@@ -18,6 +18,15 @@ To install `scapy` and `cython`, run in the terminal:
    pip install scapy
    pip install cython
    ```
+ 
+Requirements.txt
+   ```
+   Cython==0.29.11
+   matplotlib==3.0.3
+   numpy==1.18.5
+   scapy==2.4.2
+   scipy==1.4.1
+   ```
 
 ## Usage
 
